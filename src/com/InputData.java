@@ -4,10 +4,10 @@ public class InputData {
     public String name;
     public int node1;
     public int node2;
-    public float value;
+    public double value;
     public ElementTpe type;
 
-    public InputData(String name, int node1, int node2, float value, ElementTpe type) {
+    public InputData(String name, int node1, int node2, double value, ElementTpe type) {
         this.name = name;
         if (node1 < 0) {
             node1 = 0;

@@ -1,15 +1,15 @@
 package com;
 
 public class MyMatrix {
-    public float[][] matrixG;
-    public float[] matrixI;
+    public double[][] matrixG;
+    public double[] matrixI;
     public String[] matrixV;
     private int size;
 
     public MyMatrix(int size) {
         this.size = size;
-        matrixG = new float[size][size];
-        matrixI = new float[size];
+        matrixG = new double[size][size];
+        matrixI = new double[size];
         matrixV = new String[size];
     }
 
@@ -20,8 +20,8 @@ public class MyMatrix {
     }
 
     public void Utnij(Main.Dto dto) {
-        float[] newI = new float[matrixI.length - 1];
-        float[][] newG = new float[matrixG.length - 1][matrixG.length - 1];
+        double[] newI = new double[matrixI.length - 1];
+        double[][] newG = new double[matrixG.length - 1][matrixG.length - 1];
 
         for (int i = 1; i < matrixI.length; i++) {
             newI[i - 1] = matrixI[i];
@@ -46,8 +46,8 @@ public class MyMatrix {
         return newV;
     }
 
-    private float[] KopiujI(float[] poprzednieI, int nowaWielkosc) {
-        float[] newI = new float[nowaWielkosc];
+    private double[] KopiujI(double[] poprzednieI, int nowaWielkosc) {
+        double[] newI = new double[nowaWielkosc];
         for (int i = 0; i < poprzednieI.length; i++) {
             newI[i] = poprzednieI[i];
         }
@@ -55,8 +55,8 @@ public class MyMatrix {
         return newI;
     }
 
-    private float[][] KopiujG(float[][] macierzKopiowana, int nowaWielkosc) {
-        float[][] kopia = new float[nowaWielkosc][nowaWielkosc];
+    private double[][] KopiujG(double[][] macierzKopiowana, int nowaWielkosc) {
+        double[][] kopia = new double[nowaWielkosc][nowaWielkosc];
         for (int i = 0; i < macierzKopiowana.length; i++) {
             for (int j = 0; j < macierzKopiowana.length; j++) {
                 kopia[i][j] = macierzKopiowana[i][j];
@@ -93,17 +93,17 @@ public class MyMatrix {
         nMinus = data.node2;
 
         if (matrixG == null || matrixG.length == 0) {
-            matrixG = new float[maxSize][maxSize];
+            matrixG = new double[maxSize][maxSize];
         }
         if (matrixI == null || matrixI.length == 0) {
-            matrixI = new float[maxSize];
+            matrixI = new double[maxSize];
         }
 
         maxSize = matrixI.length;
 
         // będzie zawsze za mała
         IncreaseMatrixSize(maxSize);
-        float value = data.value * 10f;
+        double value = data.value * 10f;
         matrixG[maxSize][nPlus] += 1;
         matrixG[maxSize][nMinus] += -1;
         matrixG[nPlus][maxSize] += 1;
@@ -129,15 +129,15 @@ public class MyMatrix {
         nMinus = data.node2;
 
         if (matrixG == null) {
-            matrixG = new float[maxSize][maxSize];
+            matrixG = new double[maxSize][maxSize];
         }
         if (matrixI == null) {
-            matrixI = new float[maxSize];
+            matrixI = new double[maxSize];
         }
 
         if (matrixG.length > maxSize) {
             //odpowiednia wielkosc
-            float value = (1f / data.value) * 10f;
+            double value = (1f / data.value) * 10f;
             matrixG[nPlus][nPlus] += value;
             matrixG[nMinus][nMinus] += value;
             matrixG[nPlus][nMinus] += -value;
@@ -148,7 +148,7 @@ public class MyMatrix {
         } else {
             // za mała
             IncreaseMatrixSize(maxSize);
-            float value = (1f / data.value) * 10f;
+            double value = (1f / data.value) * 10f;
             matrixG[nPlus][nPlus] += value;
             matrixG[nMinus][nMinus] += value;
             matrixG[nPlus][nMinus] += -value;
@@ -173,15 +173,15 @@ public class MyMatrix {
         nMinus = data.node2;
 
         if (matrixG == null) {
-            matrixG = new float[maxSize][maxSize];
+            matrixG = new double[maxSize][maxSize];
         }
         if (matrixI == null) {
-            matrixI = new float[maxSize];
+            matrixI = new double[maxSize];
         }
 
         if (matrixI.length > maxSize) {
             //odpowiednia wielkosc
-            float value = data.value * 10f;
+            double value = data.value * 10f;
             matrixI[nPlus] += -value;
             matrixI[nMinus] += value;
             matrixV[nPlus] = "V" + nPlus;
@@ -190,7 +190,7 @@ public class MyMatrix {
         } else {
             // za mała
             IncreaseMatrixSize(maxSize);
-            float value = data.value * 10f;
+            double value = data.value * 10f;
             matrixI[nPlus] += -value;
             matrixI[nMinus] += value;
             matrixV[nPlus] = "V" + nPlus;

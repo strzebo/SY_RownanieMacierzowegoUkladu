@@ -6,8 +6,8 @@ import java.util.List;
 public class Main {
 
     public static class Dto {
-        public float[][] matrixG;
-        public float[] matrixI;
+        public double[][] matrixG;
+        public double[] matrixI;
     }
 
     public static void main(String[] args) throws Exception {
@@ -20,8 +20,8 @@ public class Main {
         MyMatrix myMatrix = new MyMatrix(0);
         Obliczenia obliczanie;
 
-        float[][] matrixG = new float[0][0];
-        float[] matrixI = new float[0];
+        double[][] matrixG = new double[0][0];
+        double[] matrixI = new double[0];
 
         Dto dto = new Dto();
         dto.matrixG = matrixG;
@@ -32,11 +32,11 @@ public class Main {
         InputData data3 = new InputData("r2", 2, 0, 20, ElementTpe.R);
         InputData data4 = new InputData("r3", 2, 3, 16, ElementTpe.R);
         InputData data5 = new InputData("r4", 3, 0, 4, ElementTpe.R);
-        AddInputData(data1, myMatrix);
-        AddInputData(data2, myMatrix);
-        AddInputData(data3, myMatrix);
-        AddInputData(data4, myMatrix);
-        AddInputData(data5, myMatrix);
+        AddInputData(data1, myMatrix, wszystkieRezystory);
+        AddInputData(data2, myMatrix, wszystkieRezystory );
+        AddInputData(data3, myMatrix, wszystkieRezystory);
+        AddInputData(data4, myMatrix, wszystkieRezystory);
+        AddInputData(data5, myMatrix, wszystkieRezystory);
 
 
         myMatrix.Utnij(dto);
@@ -54,7 +54,7 @@ public class Main {
         }
         Obliczenia.Macierze macierze = wynik.WszystkieMacierze.get(wynik.WszystkieMacierze.size() - 1);
         for (int i = 0; i < macierze.I.length; i++) {
-            wynikI.append("I").append(i + 1).append(" = ").append(Math.round(macierze.I[i])).append("\n");
+            wynikI.append("I").append(i + 1).append(" = ").append(Maths.round(macierze.I[i], 2)).append("\n");
         }
         for (InputData data : wszystkieRezystory) {
             wynikIr.append(ObliczIr(data, wynik.V)).append("\n");
@@ -65,12 +65,12 @@ public class Main {
         System.out.println(wynikIr);
     }
 
-    private static String ObliczIr(InputData data, float[] V) {
+    private static String ObliczIr(InputData data, double[] V) {
         if (V == null) {
             return "V = null";
         }
         String name = data.name;
-        float[] newV = new float[V.length + 1];
+        double[] newV = new double[V.length + 1];
         newV[0] = 0;
         for (int i = 1; i < newV.length; i++) {
             newV[i] = V[i - 1];
@@ -81,15 +81,17 @@ public class Main {
         if (newV.length < data.node2) {
             return "V za małe-";
         }
-        float V1 = newV[data.node1];
-        float V2 = newV[data.node2];
-        float G = (1 / data.value);
-        int value = Math.round((V1 - V2) * G);
+        double V1 = newV[data.node1];
+        double V2 = newV[data.node2];
+        double G = (1 / data.value);
+        double value = Maths.round((V1 - V2) * G, 2);
         return name + " = " + value;
     }
 
-    public static void AddInputData(InputData data, MyMatrix myMatrix) {
+    public static void AddInputData(InputData data, MyMatrix myMatrix, List<InputData> rezystory) {
         myMatrix.AddData(data);
-
+        if (data.type.equals(ElementTpe.R)) {
+            rezystory.add(data);
+        }
     }
 }
