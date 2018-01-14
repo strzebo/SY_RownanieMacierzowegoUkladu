@@ -14,7 +14,7 @@ public class Obliczenia
     {
         this.OryginalneG = oryginalneG;
         this.OryginalneI = oryginalneI;
-        this.Wielkosc = Math.sqrt(oryginalneG.length);
+        this.Wielkosc = oryginalneG.length;
     }
 
     public Wynik Oblicz() throws Exception
