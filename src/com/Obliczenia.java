@@ -30,7 +30,7 @@ public class Obliczenia
         int wynik = 1;
         if (czyPierwszeZero)
         {
-            for (int i = 0; i < this.Wielkosc; i++)
+            for (int i = 0; i < (int) this.Wielkosc; i++)
             {
                 if (this.OryginalneI[i] == 0)
                     return i;
@@ -44,16 +44,16 @@ public class Obliczenia
         ArrayList<Macierze> wszystkieMacierze = new ArrayList<Macierze>();
         wszystkieMacierze.add(new Macierze(KopiujG(this.OryginalneG), this.OryginalneI, 0));
 
-        for (int przeksztalcenie = iloscPrzeksztalcen; przeksztalcenie < this.Wielkosc; przeksztalcenie++)
+        for (int przeksztalcenie = iloscPrzeksztalcen; przeksztalcenie < (int) this.Wielkosc; przeksztalcenie++)
         {
             Macierze macierzPoprzednia = wszystkieMacierze.get(przeksztalcenie - 1);
             float[][] macierz = KopiujG(macierzPoprzednia.G);
             float[] noweI = KopiujI(macierzPoprzednia.I);
 
             wszystkieMacierze.add(new Macierze(macierz, noweI, przeksztalcenie));
-            for (int i = przeksztalcenie; i < this.Wielkosc; i++)
+            for (int i = przeksztalcenie; i < (int) this.Wielkosc; i++)
             {
-                for (int j = przeksztalcenie - 1; j < this.Wielkosc; j++)
+                for (int j = przeksztalcenie - 1; j < (int) this.Wielkosc; j++)
                 {
                     macierz[i][j] = ObliczPrzeksztalcenie(i, j, przeksztalcenie, macierzPoprzednia.G);
                     System.out.printf("Modyfikacja " + przeksztalcenie + ":" + macierz[i][j]);
@@ -131,9 +131,9 @@ public class Obliczenia
     private float[][] KopiujG(float[][] macierzKopiowana)
 {
     float[][] kopia = new float[(int)this.Wielkosc][(int)this.Wielkosc];
-    for(int i = 0; i < this.Wielkosc; i++)
+    for(int i = 0; i < (int) this.Wielkosc; i++)
     {
-        for(int j = 0; j < this.Wielkosc; j++)
+        for(int j = 0; j < (int) this.Wielkosc; j++)
         {
             kopia[i][j] = macierzKopiowana[i][j];
         }
