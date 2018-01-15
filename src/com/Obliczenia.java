@@ -164,13 +164,4 @@ public class Obliczenia
             this.Id = id;
         }
     }
-
-    public static void rysujMacierz(double[][] macierz) {
-        for (int wiersz = 0; wiersz < macierz.length; wiersz++) {
-            for (int kolumna = 0; kolumna < macierz[wiersz].length; kolumna++) {
-                System.out.printf("%8.2f", macierz[wiersz][kolumna]);
-            }
-            System.out.println();
-        }
-    }
 }
