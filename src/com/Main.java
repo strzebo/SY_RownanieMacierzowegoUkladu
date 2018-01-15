@@ -12,6 +12,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
         List<InputData> wszystkieRezystory = new ArrayList<>();
+        List<InputData> all = new ArrayList<>();
 
         StringBuilder wynikV = new StringBuilder();
         StringBuilder wynikI = new StringBuilder();
@@ -32,18 +33,17 @@ public class Main {
         InputData data3 = new InputData("r2", 2, 0, 20, ElementType.R);
         InputData data4 = new InputData("r3", 2, 3, 16, ElementType.R);
         InputData data5 = new InputData("r4", 3, 0, 4, ElementType.R);
-        AddInputData(data1, myMatrix, wszystkieRezystory);
-        AddInputData(data2, myMatrix, wszystkieRezystory );
-        AddInputData(data3, myMatrix, wszystkieRezystory);
-        AddInputData(data4, myMatrix, wszystkieRezystory);
-        AddInputData(data5, myMatrix, wszystkieRezystory);
+        AddInputData(data1, myMatrix, wszystkieRezystory, all);
+        AddInputData(data2, myMatrix, wszystkieRezystory, all);
+        AddInputData(data3, myMatrix, wszystkieRezystory, all);
+        AddInputData(data4, myMatrix, wszystkieRezystory, all);
+        AddInputData(data5, myMatrix, wszystkieRezystory, all);
 
 
         myMatrix.Utnij(dto);
 
         matrixG = dto.matrixG;
         matrixI = dto.matrixI;
-
 
 
         obliczanie = new Obliczenia(matrixI, matrixG);
@@ -63,6 +63,9 @@ public class Main {
         System.out.println(wynikV);
         System.out.println(wynikI);
         System.out.println(wynikIr);
+        System.out.println();
+        wyswietlElementy(all);
+
     }
 
     private static String ObliczIr(InputData data, double[] V) {
@@ -88,10 +91,22 @@ public class Main {
         return name + " = " + value;
     }
 
-    public static void AddInputData(InputData data, MyMatrix myMatrix, List<InputData> rezystory) {
+    public static void AddInputData(InputData data, MyMatrix myMatrix, List<InputData> rezystory, List<InputData> all) {
+        all.add(data);
         myMatrix.AddData(data);
         if (data.type.equals(ElementType.R)) {
             rezystory.add(data);
         }
+    }
+
+    public static void wyswietlElementy(List<InputData> inputDataList) {
+        System.out.println("nazwa | węzeł+ | węzeł- | wartość | rodzaj");
+        System.out.println("------------------------------------------");
+        for (InputData data : inputDataList) {
+            System.out.printf("%3s   | %4d   | %4d   | %6.2f  | %4s", data.name, data.node1, data.node2, data.value, data.type.toString());
+            System.out.println();
+        }
+        System.out.println("------------------------------------------");
+
     }
 }
