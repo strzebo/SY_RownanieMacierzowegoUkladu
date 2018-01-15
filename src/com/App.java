@@ -2,6 +2,7 @@ package com;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class App {
     private List<InputData> allResistors = new ArrayList<>();
@@ -13,11 +14,55 @@ public class App {
     public void run() throws Exception {
         initData();
         prepareMatrixAfterAddedData();
-
         Obliczenia obliczanie = new Obliczenia(matrixI, matrixG);
         Obliczenia.Wynik wynik = obliczanie.Oblicz();
-
         printResult(wynik);
+
+        getDataFromUserAndCalc();
+    }
+
+    private InputData getDataFromUser() throws Exception {
+        InputData data = null;
+        Scanner scan = new Scanner(System.in);
+        String name = scan.next();
+
+        try {
+            int node1 = Integer.parseInt(scan.next());
+            int node2 = Integer.parseInt(scan.next());
+            double value = Double.parseDouble(scan.next());
+            ElementType type = ElementType.valueOf(scan.next());
+            data = new InputData(name, node1, node2, value, type);
+        } catch (Exception e) {
+            scan.remove();
+            scan.reset();
+            scan.close();
+            System.out.println("Niepoprawne dane wejsciowe!");
+            throw e;
+        }
+
+        return data;
+    }
+
+    private void getDataFromUserAndCalc() {
+
+
+        while (true) {
+            try {
+                System.out.println();
+                System.out.println("Dodaj nowe dane w formacie");
+                System.out.println("<nazwa> <węzeł+> <węzeł-> <vartosc> <typ - Si | R | Iz | >");
+
+                InputData data = getDataFromUser();
+                AddInputData(data, myMatrix, allResistors, all);
+                prepareMatrixAfterAddedData();
+                Obliczenia obliczanie = new Obliczenia(matrixI, matrixG);
+                Obliczenia.Wynik wynik = obliczanie.Oblicz();
+                printResult(wynik);
+            } catch (Exception e) {
+                System.out.println("Niepoprawne dane wejsciowe! Spróbuj ponowanie");
+            }
+        }
+
     }
 
     private String ObliczIr(InputData data, double[] V) {
@@ -71,7 +116,7 @@ public class App {
         StringBuilder wynikIr = new StringBuilder();
 
         for (int i = 0; i < wynik.V.length; i++) {
-            wynikV.append(myMatrix.matrixV[i + 1]).append(" = ").append(wynik.V[i]).append("\n");
+            wynikV.append(myMatrix.matrixV[i + 1]).append(" = ").append(Math.round(wynik.V[i], 2)).append("\n");
         }
         Obliczenia.Macierze macierze = wynik.WszystkieMacierze.get(wynik.WszystkieMacierze.size() - 1);
         for (int i = 0; i < macierze.I.length; i++) {
@@ -90,7 +135,7 @@ public class App {
         Printer.printMatrix(myMatrix);
     }
 
-    private void prepareMatrixAfterAddedData(){
+    private void prepareMatrixAfterAddedData() {
         App.Dto dto = new App.Dto();
         dto.matrixG = matrixG;
         dto.matrixI = matrixI;
