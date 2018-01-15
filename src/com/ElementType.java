@@ -1,5 +1,5 @@
 package com;
 
-public enum ElementTpe {
+public enum ElementType {
     SI, R, Iv
 }

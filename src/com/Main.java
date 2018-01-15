@@ -27,11 +27,11 @@ public class Main {
         dto.matrixG = matrixG;
         dto.matrixI = matrixI;
 
-        InputData data1 = new InputData("s1", 0, 1, 1, ElementTpe.SI);
-        InputData data2 = new InputData("r1", 1, 2, 10, ElementTpe.R);
-        InputData data3 = new InputData("r2", 2, 0, 20, ElementTpe.R);
-        InputData data4 = new InputData("r3", 2, 3, 16, ElementTpe.R);
-        InputData data5 = new InputData("r4", 3, 0, 4, ElementTpe.R);
+        InputData data1 = new InputData("s1", 0, 1, 1, ElementType.SI);
+        InputData data2 = new InputData("r1", 1, 2, 10, ElementType.R);
+        InputData data3 = new InputData("r2", 2, 0, 20, ElementType.R);
+        InputData data4 = new InputData("r3", 2, 3, 16, ElementType.R);
+        InputData data5 = new InputData("r4", 3, 0, 4, ElementType.R);
         AddInputData(data1, myMatrix, wszystkieRezystory);
         AddInputData(data2, myMatrix, wszystkieRezystory );
         AddInputData(data3, myMatrix, wszystkieRezystory);
@@ -54,7 +54,7 @@ public class Main {
         }
         Obliczenia.Macierze macierze = wynik.WszystkieMacierze.get(wynik.WszystkieMacierze.size() - 1);
         for (int i = 0; i < macierze.I.length; i++) {
-            wynikI.append("I").append(i + 1).append(" = ").append(Maths.round(macierze.I[i], 2)).append("\n");
+            wynikI.append("I").append(i + 1).append(" = ").append(Math.round(macierze.I[i], 2)).append("\n");
         }
         for (InputData data : wszystkieRezystory) {
             wynikIr.append(ObliczIr(data, wynik.V)).append("\n");
@@ -84,13 +84,13 @@ public class Main {
         double V1 = newV[data.node1];
         double V2 = newV[data.node2];
         double G = (1 / data.value);
-        double value = Maths.round((V1 - V2) * G, 2);
+        double value = Math.round((V1 - V2) * G, 2);
         return name + " = " + value;
     }
 
     public static void AddInputData(InputData data, MyMatrix myMatrix, List<InputData> rezystory) {
         myMatrix.AddData(data);
-        if (data.type.equals(ElementTpe.R)) {
+        if (data.type.equals(ElementType.R)) {
             rezystory.add(data);
         }
     }

@@ -67,13 +67,13 @@ public class MyMatrix {
     }
 
     public void AddData(InputData data) {
-        ElementTpe type = data.type;
+        ElementType type = data.type;
 
-        if (type.equals(ElementTpe.SI)) {
+        if (type.equals(ElementType.SI)) {
             AddIS(data);
-        } else if (type.equals(ElementTpe.R)) {
+        } else if (type.equals(ElementType.R)) {
             AddR(data);
-        } else if (type.equals(ElementTpe.Iv)) {
+        } else if (type.equals(ElementType.Iv)) {
             AddIv(data);
         }
     }
