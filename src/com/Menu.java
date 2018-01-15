@@ -1,9 +1,7 @@
 package com;
 
-public class Menu
-{
-    public void RysujMenu()
-    {
+public class Menu {
+    public void RysujMenu() {
 
     }
 }
