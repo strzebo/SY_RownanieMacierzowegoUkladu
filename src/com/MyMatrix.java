@@ -19,7 +19,7 @@ public class MyMatrix {
         matrixV = KopiujV(matrixV, increaseToSize + 1);
     }
 
-    public void Utnij(Main.Dto dto) {
+    public void Utnij(App.Dto dto) {
         double[] newI = new double[matrixI.length - 1];
         double[][] newG = new double[matrixG.length - 1][matrixG.length - 1];
 
